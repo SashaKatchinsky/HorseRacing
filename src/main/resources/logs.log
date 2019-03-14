@@ -1,0 +1,17 @@
+WARN  | 2019-02-03 19:57:22 | [main] dao.HorseDao (HorseDao.java:68) - Request провалился java.sql.SQLException: Illegal operation on empty result set.
+WARN  | 2019-02-03 20:30:50 | [main] dao.HorseDao (HorseDao.java:110) - Request провалился java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '78768' for key 'PRIMARY'
+WARN  | 2019-02-03 22:26:41 | [main] dao.HorseDao (HorseDao.java:115) - Request провалился java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '78768' for key 'PRIMARY'
+WARN  | 2019-02-04 19:48:39 | [main] dao.UserDao (UserDao.java:120) - Request провалился java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'sfasd' for key 'PRIMARY'
+WARN  | 2019-02-07 23:28:12 | [main] dao.RiderDaoMySql (RiderDaoMySql.java:79) - Request провалился java.sql.SQLSyntaxErrorException: Table 'horse_racing.rider' doesn't exist
+WARN  | 2019-02-07 23:44:08 | [main] dao.UserDaoMySql (UserDaoMySql.java:82) - Request провалился java.sql.SQLException: Illegal operation on empty result set.
+WARN  | 2019-02-08 20:10:43 | [main] dao.UserDaoMySql (UserDaoMySql.java:170) - Request провалился java.sql.SQLException: Can not issue data manipulation statements with executeQuery().
+FATAL | 2019-02-13 19:54:04 | [main] connection.ConnectionPool (ConnectionPool.java:64) - Невозможно получить connection к базе
+FATAL | 2019-02-13 19:54:41 | [main] connection.ConnectionPool (ConnectionPool.java:64) - Невозможно получить connection к базе
+FATAL | 2019-02-13 20:01:43 | [main] connection.ConnectionPool (ConnectionPool.java:64) - Невозможно получить connection к базе
+FATAL | 2019-02-15 09:31:45 | [main] connection.ConnectionPool (ConnectionPool.java:64) - Невозможно получить connection к базе
+WARN  | 2019-02-20 09:56:13 | [main] dao.IventDaoMySql (IventDaoMySql.java:108) - Request провалился java.sql.SQLSyntaxErrorException: Unknown column 'Rider1_Place1_Coefficient' in 'field list'
+WARN  | 2019-02-20 15:59:44 | [main] dao.IventDaoMySql (IventDaoMySql.java:108) - Request провалился java.sql.SQLSyntaxErrorException: Unknown column 'Rider1_Place1_Coefficient' in 'field list'
+WARN  | 2019-02-20 16:04:11 | [main] dao.IventDaoMySql (IventDaoMySql.java:108) - Request провалился java.sql.SQLSyntaxErrorException: Unknown column 'Rider1_Place1_Coefficient' in 'field list'
+WARN  | 2019-02-20 17:03:31 | [main] dao.HorseDaoMySql (HorseDaoMySql.java:81) - Request провалился java.sql.SQLException: Illegal operation on empty result set.
+WARN  | 2019-02-22 20:04:59 | [main] dao.IventDaoMySql (IventDaoMySql.java:157) - Request провалился java.sql.SQLSyntaxErrorException: Unknown column 'Rider4IDRider1_Place1_Coefficient' in 'field list'
+WARN  | 2019-02-24 19:09:37 | [main] dao.BetDaoMySql (BetDaoMySql.java:91) - Request провалился java.sql.SQLException: No value specified for parameter 1
