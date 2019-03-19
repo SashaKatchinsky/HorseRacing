@@ -25,7 +25,7 @@ import java.util.List;
         "/main"
 })
 public class HorseRacingServlet extends HttpServlet {
-    Logger HORSERACINGSERVLETLOGGER = LogManager.getLogger(HorseRacingServlet.class);
+    private static final Logger HORSERACINGSERVLETLOGGER = LogManager.getLogger(HorseRacingServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

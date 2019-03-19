@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.dao.exceptions;
  * The type Open db prop file exception.
  */
 public class OpenDBPropFileException extends DaoException {
+
+    private static final long serialVersionUID = 8682571053395529925L;
+
     /**
      * Instantiates a new Open db prop file exception.
      */

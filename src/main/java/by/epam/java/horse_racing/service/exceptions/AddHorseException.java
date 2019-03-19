@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Add horse exception.
  */
 public class AddHorseException extends ServiceException {
+
+    private static final long serialVersionUID = 2954615882948221941L;
+
     /**
      * Instantiates a new Add horse exception.
      */

@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Set new horses exception.
  */
 public class SetNewHorsesException extends ServiceException {
+
+    private static final long serialVersionUID = -4293504655305781906L;
+
     /**
      * Instantiates a new Set new horses exception.
      */

@@ -5,6 +5,7 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.service.HorseService;
 import by.epam.java.horse_racing.service.exceptions.AddHorseException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,11 +42,14 @@ public class AddHorseCommand extends ActionCommand {
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getInstance().getProperty(PAGE_MAIN);
         String name = request.getParameter(NAME);
-        Breed breed = Breed.valueOf(request.getParameter(BREED));
-        try {
-            HorseService.getInstance().addHorse(name , breed);
-        } catch (AddHorseException e) {
-            ADDHORSECOMMANDLOGGER.warn("Can not add horse " + name , e);
+        name = XSSAttackSecurity.getInstance().secure(name);
+        if (name != null && name.length() <= 30) {
+            Breed breed = Breed.valueOf(request.getParameter(BREED));
+            try {
+                HorseService.getInstance().addHorse(name, breed);
+            } catch (AddHorseException e) {
+                ADDHORSECOMMANDLOGGER.warn("Can not add horse " + name, e);
+            }
         }
         return page;
     }

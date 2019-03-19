@@ -6,6 +6,7 @@ import by.epam.java.horse_racing.dao.UserDaoMySql;
 import by.epam.java.horse_racing.dao.exceptions.DaoException;
 import by.epam.java.horse_racing.service.UserService;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -52,20 +53,23 @@ public class LoginUserCommand extends ActionCommand {
     public String execute(HttpServletRequest request){
         String page = null;
         String login = request.getParameter(LOGIN);
-        char[] password = request.getParameter(PASSWORD).toCharArray();
-        try {
-            if (UserService.getInstance().checkLoginPassword(login , password)) {
-                HttpSession session = request.getSession();
-                User user = UserDaoMySql.getInstance().getUserByLogin(login);
-                session.setAttribute(USER, user);
-                session.setAttribute(ISAUTHORIZED , true);
-                page = ConfigurationManager.getInstance().getProperty(PAGE_MAIN);
-            } else {
-                page = ConfigurationManager.getInstance().getProperty(PAGE_START);
-                page += GET_PARAM_ERROR_LOGIN;
+        login = XSSAttackSecurity.getInstance().secure(login);
+        if (login != null && login.length() <= 30) {
+            char[] password = request.getParameter(PASSWORD).toCharArray();
+            try {
+                if (UserService.getInstance().checkLoginPassword(login, password)) {
+                    HttpSession session = request.getSession();
+                    User user = UserDaoMySql.getInstance().getUserByLogin(login);
+                    session.setAttribute(USER, user);
+                    session.setAttribute(ISAUTHORIZED, true);
+                    page = ConfigurationManager.getInstance().getProperty(PAGE_MAIN);
+                } else {
+                    page = ConfigurationManager.getInstance().getProperty(PAGE_START);
+                    page += GET_PARAM_ERROR_LOGIN;
+                }
+            } catch (DaoException e) {
+                LOGINUSERCOMMANDLOGGER.warn("Can not login user " + login, e);
             }
-        } catch (DaoException e) {
-            LOGINUSERCOMMANDLOGGER.warn("Can not login user " + login , e);
         }
         return page;
     }

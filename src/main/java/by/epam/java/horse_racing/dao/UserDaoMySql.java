@@ -234,6 +234,7 @@ public class UserDaoMySql implements UserDao {
             preparedStatement.setString(1 , login);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
+            resultSet.getString("login");
             return true;
         } catch (SQLException e) {
             return false;

@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.dao.exceptions;
  * The type Get connection exception.
  */
 public class GetConnectionException extends DaoException {
+
+    private static final long serialVersionUID = -8060582880281783932L;
+
     /**
      * Instantiates a new Get connection exception.
      */

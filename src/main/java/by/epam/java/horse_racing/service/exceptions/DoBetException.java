@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Do bet exception.
  */
 public class DoBetException extends ServiceException {
+
+    private static final long serialVersionUID = -7126306270157316465L;
+
     /**
      * Instantiates a new Do bet exception.
      */

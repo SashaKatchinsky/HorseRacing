@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.dao.exceptions;
  * The type Dao exception.
  */
 public class DaoException extends Exception {
+
+    private static final long serialVersionUID = 1999489013180434950L;
+
     /**
      * Instantiates a new Dao exception.
      */

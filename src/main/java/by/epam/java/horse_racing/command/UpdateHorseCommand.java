@@ -5,6 +5,7 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.service.HorseService;
 import by.epam.java.horse_racing.service.exceptions.UpdateHorseException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,15 +42,17 @@ public class UpdateHorseCommand extends ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getInstance().getProperty(PAGE_MAIN);
-        String strId = request.getParameter(ID);
-        if (strId != null) {
-            int id = Integer.parseInt(strId);
+        if (request.getParameter(ID) != null) {
+            int id = Integer.parseInt(request.getParameter(ID));
             String name = request.getParameter(NAME);
-            Breed breed = Breed.valueOf(request.getParameter(BREED));
-            try {
-                HorseService.getInstance().updateHorse(id, name, breed);
-            } catch (UpdateHorseException e) {
-                UPDATEHORSECOMMANDLOGGER.warn("Can not update horse " + name, e);
+            name = XSSAttackSecurity.getInstance().secure(name);
+            if (name != null && name.length() <= 30) {
+                Breed breed = Breed.valueOf(request.getParameter(BREED));
+                try {
+                    HorseService.getInstance().updateHorse(id, name, breed);
+                } catch (UpdateHorseException e) {
+                    UPDATEHORSECOMMANDLOGGER.warn("Can not update horse " + name, e);
+                }
             }
         }
         return page;

@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Update event exception.
  */
 public class UpdateEventException extends ServiceException {
+
+    private static final long serialVersionUID = 4558248341826768721L;
+
     /**
      * Instantiates a new Update event exception.
      */

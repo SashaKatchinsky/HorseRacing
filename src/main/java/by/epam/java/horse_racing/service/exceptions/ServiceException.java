@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Service exception.
  */
 public class ServiceException extends Exception {
+
+    private static final long serialVersionUID = -7692974407258843567L;
+
     /**
      * Instantiates a new Service exception.
      */

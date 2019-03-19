@@ -12,4 +12,13 @@ public class BetValidationTest {
         //then
         Assert.assertEquals(actual , expected);
     }
+
+    @Test(dataProvider = "isRidersValidTestData" , dataProviderClass = BetValidationTestData.class)
+    public void isRidersValidTest(int rider1Position , int rider2Position , int rider3Position , int rider4Position , int countOfRiders , boolean expected) {
+        //when
+        boolean actual = BetValidation.getInstance().isRidersValid(rider1Position , rider2Position , rider3Position , rider4Position , countOfRiders);
+        //then
+        Assert.assertEquals(actual , expected);
+    }
+
 }

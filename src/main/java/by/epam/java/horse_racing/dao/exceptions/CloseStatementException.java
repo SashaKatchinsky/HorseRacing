@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.dao.exceptions;
  * The type Close statement exception.
  */
 public class CloseStatementException extends DaoException {
+
+    private static final long serialVersionUID = -532563520941911301L;
+
     /**
      * Instantiates a new Close statement exception.
      */

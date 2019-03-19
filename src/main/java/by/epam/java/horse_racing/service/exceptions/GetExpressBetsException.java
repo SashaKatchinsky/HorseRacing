@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Get express bets exception.
  */
 public class GetExpressBetsException extends ServiceException {
+
+    private static final long serialVersionUID = -4591491821507142311L;
+
     /**
      * Instantiates a new Get express bets exception.
      */

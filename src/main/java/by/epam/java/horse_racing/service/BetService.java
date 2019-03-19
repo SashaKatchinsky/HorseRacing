@@ -252,7 +252,7 @@ public class BetService implements Service {
             connection.setAutoCommit(false);
             for (Bet bet : expressBets) {
                 preparedStatement = connection.prepareStatement(SQL_DELETE_BET_BY_KEY);
-                preparedStatement.setInt(1 , betId);
+                preparedStatement.setInt(1 , bet.getId());
                 preparedStatement.executeUpdate();
             }
             preparedStatement = connection.prepareStatement(SQL_UPDATE_BALANCE_OF_USER_BY_KEY);

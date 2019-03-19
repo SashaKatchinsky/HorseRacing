@@ -37,50 +37,9 @@
             </p>
             <p>
             <pre><fmt:message key="ifyouchoose0youwillnotdobetonthisrider" bundle="${ mainRB }"/></pre>
-            </p>
+            <pre><fmt:message key="ifanyriderswillhavethesamepositionsyouwillnotdobet" bundle="${ mainRB }"/></pre>
             <input type="hidden" name="command" value="bet">
-            <input id="submit" type="submit" value="Do bet" class="great_btn">
+            <input id="submit" type="submit" value="<fmt:message key="dobet" bundle="${ mainRB }"/>" class="great_btn">
         </form>
     </div>
 </div>
-<script>
-    function checkDoBetForm() {
-        var button = document.getElementById('submit');
-        var select0 = $("#select0").val();
-        var select1 = $("#select1").val();
-        var select2 = $("#select2").val();
-        var select3 = $("#select3").val();
-
-        let set = new Set();
-        let countNoZero = 0;
-
-        if (select0 != 0) {
-            set.add(select0);
-            countNoZero++;
-        }
-        if (select1 != 0) {
-            set.add(select1);
-            countNoZero++;
-        }
-        if (select2 != 0) {
-            set.add(select2);
-            countNoZero++;
-        }
-        if (select3 != 0) {
-            set.add(select3);
-            countNoZero++;
-        }
-
-        if (countNoZero === set.size) {
-            button.disabled = false;
-        } else {
-            button.disabled = true;
-        }
-        button.disabled = false;
-    }
-    $(document).ready(function () {
-        $("#dobetselect0 , #dobetselect1 , #dobetselect2 , #dobetselect3").onchange(checkDoBetForm());
-        alert("AHAHAHAHHA");
-    });
-
-</script>

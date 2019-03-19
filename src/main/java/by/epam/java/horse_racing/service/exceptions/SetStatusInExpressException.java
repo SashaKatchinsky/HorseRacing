@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Set status in express exception.
  */
 public class SetStatusInExpressException extends ServiceException {
+
+    private static final long serialVersionUID = 2408453486503883926L;
+
     /**
      * Instantiates a new Set status in express exception.
      */

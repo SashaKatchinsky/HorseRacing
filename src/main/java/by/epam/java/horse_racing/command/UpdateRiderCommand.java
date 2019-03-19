@@ -4,6 +4,7 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.service.RiderService;
 import by.epam.java.horse_racing.service.exceptions.UpdateRiderException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,15 +41,17 @@ public class UpdateRiderCommand extends ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getInstance().getProperty(PAGE_MAIN);
-        String strId = request.getParameter(UPDATEDRIDERID);
-        if (strId != null) {
-            int updatedRiderId = Integer.parseInt(strId);
-            String updatedName = request.getParameter(UPDATEDNAME);
-            int horseId = Integer.parseInt(request.getParameter(HORSEID));
-            try {
-                RiderService.getInstance().updateRider(updatedRiderId, updatedName, horseId);
-            } catch (UpdateRiderException e) {
-                UPDATERIDERCOMMANDLOGGER.warn("Can not update rider " + updatedRiderId, e);
+        if (request.getParameter(UPDATEDRIDERID) != null) {
+            int updatedRiderId = Integer.parseInt(request.getParameter(UPDATEDRIDERID));
+            String name = request.getParameter(UPDATEDNAME);
+            name = XSSAttackSecurity.getInstance().secure(name);
+            if (name != null && name.length() <= 30) {
+                int horseId = Integer.parseInt(request.getParameter(HORSEID));
+                try {
+                    RiderService.getInstance().updateRider(updatedRiderId, name, horseId);
+                } catch (UpdateRiderException e) {
+                    UPDATERIDERCOMMANDLOGGER.warn("Can not update rider " + updatedRiderId, e);
+                }
             }
         }
         return page;

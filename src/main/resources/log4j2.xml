@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
+<Configuration status="ERROR">
+
     <Appenders>
-        <File name="FILE" fileName="src/main/resources/logs.log" append="true">
-            <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
+        <File name="ERRORFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+            <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
         </File>
+
+        <File name="FATALFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+            <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
+        </File>
+
+        <FILE name="TRACEFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+            <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
+        </FILE>
+
+        <File name="DEBUGFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+            <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
+        </File>
+
+        <File name="INFOFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+            <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
+        </File>
+
+        <File name="WARNFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+            <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
+        </File>
+
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} - [%-5p] - %m%n"/>
+        </Console>
     </Appenders>
+
     <Loggers>
-        <Logger name="com.jcg" level="info" />
-        <Root level="info">
-            <AppenderRef ref="FILE" />
+        <Root level="TRACE">
+            <Appender-ref ref="STDOUT"/>
+            <Appender-ref ref="DEBUGFILE" level="DEBUG"/>
+            <Appender-ref ref="ERRORFILE" level="ERROR"/>
+            <Appender-ref ref="TRACEFILE" level="TRACE"/>
+            <Appender-ref ref="FATALEFILE" level="FATAL"/>
+            <Appender-ref ref="INFOEFILE" level="INFO"/>
+            <Appender-ref ref="WARNEFILE" level="WARN"/>
         </Root>
     </Loggers>
+
 </Configuration>

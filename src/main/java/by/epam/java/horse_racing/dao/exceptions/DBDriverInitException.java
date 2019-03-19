@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.dao.exceptions;
  * The type Db driver init exception.
  */
 public class DBDriverInitException extends DaoException {
+
+    private static final long serialVersionUID = 4258312058206782179L;
+
     /**
      * Instantiates a new Db driver init exception.
      */

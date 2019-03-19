@@ -9,6 +9,7 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="dt" uri="http://dateTimeTag.com" %>
 <fmt:setLocale value="${language}" scope="session"/>
 <fmt:setBundle basename="mainPageContent" var="mainRB" scope="session"/>
 <html>
@@ -30,6 +31,9 @@
                 <input type="hidden" name="command" value="setEnglishLanguage">
                 <input name="language" type="submit" value="English" ${sessionScope.language == 'en' ? 'selected' : ''}>
             </form>
+        </div>
+        <div style="float: right; color: WHITE;">
+            <dt:DateTimeTag locale="${language}"/>
         </div>
     </div>
     <h1 align="center"><fmt:message key="welcome" bundle="${ mainRB }" /></h1>

@@ -5,6 +5,7 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.service.UserService;
 import by.epam.java.horse_racing.service.exceptions.UpdateUserException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,12 +49,15 @@ public class UpdateUserCommand extends ActionCommand {
         String login = request.getParameter(USER);
         if (login != null) {
             String name = request.getParameter(NAME);
-            double balance = Double.parseDouble(request.getParameter(BALANCE));
-            Access access = Access.valueOf(request.getParameter(ACCESS));
-            try {
-                UserService.getInstance().updateUser(login, name, balance, access);
-            } catch (UpdateUserException e) {
-                UPDATEUSERCOMMANDLOGGER.warn("Can not update user " + login, e);
+            name = XSSAttackSecurity.getInstance().secure(name);
+            if (name != null && name.length() <= 30) {
+                double balance = Double.parseDouble(request.getParameter(BALANCE));
+                Access access = Access.valueOf(request.getParameter(ACCESS));
+                try {
+                    UserService.getInstance().updateUser(login, name, balance, access);
+                } catch (UpdateUserException e) {
+                    UPDATEUSERCOMMANDLOGGER.warn("Can not update user " + login, e);
+                }
             }
         }
         return page;

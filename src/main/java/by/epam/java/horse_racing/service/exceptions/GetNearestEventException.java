@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Get nearest event exception.
  */
 public class GetNearestEventException extends ServiceException {
+
+    private static final long serialVersionUID = 7103414960190445759L;
+
     /**
      * Instantiates a new Get nearest event exception.
      */

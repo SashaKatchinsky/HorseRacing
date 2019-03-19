@@ -4,6 +4,8 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.service.EventService;
 import by.epam.java.horse_racing.service.exceptions.AddEventException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
+import by.epam.java.horse_racing.validation.EventValidation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -152,42 +154,49 @@ public class AddEventCommand extends ActionCommand {
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getInstance().getProperty(PAGE_MAIN);
         String name = request.getParameter(NAME);
-        LocalDate date = LocalDate.parse(request.getParameter(DATE));
-        LocalTime time = LocalTime.parse(request.getParameter(TIME));
-        int rider1Id = Integer.parseInt(request.getParameter(RIDER_1));
-        int rider2Id = Integer.parseInt(request.getParameter(RIDER_2));
-        int rider3Id = Integer.parseInt(request.getParameter(RIDER_3));
-        int rider4Id = Integer.parseInt(request.getParameter(RIDER_4));
-        String isRandom = request.getParameter(ISRANDOMCOEF);
-        if (isRandom != null) {
-            try {
-                EventService.getInstance().addEventWithCoefGeneration(name , date , time , rider1Id , rider2Id , rider3Id , rider4Id);
-            } catch (AddEventException e) {
-                ADDEVENTCOMMANDLOGGER.warn("Can not add event " + name  ,e);
-            }
-        } else {
-            double coef1_1 = Double.parseDouble(request.getParameter(R1_P1));
-            double coef1_2 = Double.parseDouble(request.getParameter(R1_P2));
-            double coef1_3 = Double.parseDouble(request.getParameter(R1_P3));
-            double coef1_4 = Double.parseDouble(request.getParameter(R1_P4));
-            double coef2_1 = Double.parseDouble(request.getParameter(R2_P1));
-            double coef2_2 = Double.parseDouble(request.getParameter(R2_P2));
-            double coef2_3 = Double.parseDouble(request.getParameter(R2_P3));
-            double coef2_4 = Double.parseDouble(request.getParameter(R2_P4));
-            double coef3_1 = Double.parseDouble(request.getParameter(R3_P1));
-            double coef3_2 = Double.parseDouble(request.getParameter(R3_P2));
-            double coef3_3 = Double.parseDouble(request.getParameter(R3_P3));
-            double coef3_4 = Double.parseDouble(request.getParameter(R3_P4));
-            double coef4_1 = Double.parseDouble(request.getParameter(R4_P1));
-            double coef4_2 = Double.parseDouble(request.getParameter(R4_P2));
-            double coef4_3 = Double.parseDouble(request.getParameter(R4_P3));
-            double coef4_4 = Double.parseDouble(request.getParameter(R4_P4));
-            try {
-                EventService.getInstance().addEventWithoutCoefGeneration(name , date , time , rider1Id , rider2Id , rider3Id , rider4Id,
-                        coef1_1 , coef1_2 , coef1_3 , coef1_4 , coef2_1  ,coef2_2 , coef2_3 , coef2_4 ,
-                        coef3_1 , coef3_2 , coef3_3 , coef3_4 , coef4_1 , coef4_2 , coef4_3 , coef4_4);
-            } catch (AddEventException e) {
-                ADDEVENTCOMMANDLOGGER.warn("Can not add event " + name  ,e);
+        name = XSSAttackSecurity.getInstance().secure(name);
+        if (name != null && name.length() <= 30) {
+            LocalDate date = LocalDate.parse(request.getParameter(DATE));
+            LocalTime time = LocalTime.parse(request.getParameter(TIME));
+            if (EventValidation.getInstance().isTimeValid(date, time)) {
+                int rider1Id = Integer.parseInt(request.getParameter(RIDER_1));
+                int rider2Id = Integer.parseInt(request.getParameter(RIDER_2));
+                int rider3Id = Integer.parseInt(request.getParameter(RIDER_3));
+                int rider4Id = Integer.parseInt(request.getParameter(RIDER_4));
+                if (EventValidation.getInstance().isRidersValid(rider1Id, rider2Id, rider3Id, rider4Id)) {
+                    String isRandom = request.getParameter(ISRANDOMCOEF);
+                    if (isRandom != null) {
+                        try {
+                            EventService.getInstance().addEventWithCoefGeneration(name, date, time, rider1Id, rider2Id, rider3Id, rider4Id);
+                        } catch (AddEventException e) {
+                            ADDEVENTCOMMANDLOGGER.warn("Can not add event " + name, e);
+                        }
+                    } else {
+                        double coef1_1 = Double.parseDouble(request.getParameter(R1_P1));
+                        double coef1_2 = Double.parseDouble(request.getParameter(R1_P2));
+                        double coef1_3 = Double.parseDouble(request.getParameter(R1_P3));
+                        double coef1_4 = Double.parseDouble(request.getParameter(R1_P4));
+                        double coef2_1 = Double.parseDouble(request.getParameter(R2_P1));
+                        double coef2_2 = Double.parseDouble(request.getParameter(R2_P2));
+                        double coef2_3 = Double.parseDouble(request.getParameter(R2_P3));
+                        double coef2_4 = Double.parseDouble(request.getParameter(R2_P4));
+                        double coef3_1 = Double.parseDouble(request.getParameter(R3_P1));
+                        double coef3_2 = Double.parseDouble(request.getParameter(R3_P2));
+                        double coef3_3 = Double.parseDouble(request.getParameter(R3_P3));
+                        double coef3_4 = Double.parseDouble(request.getParameter(R3_P4));
+                        double coef4_1 = Double.parseDouble(request.getParameter(R4_P1));
+                        double coef4_2 = Double.parseDouble(request.getParameter(R4_P2));
+                        double coef4_3 = Double.parseDouble(request.getParameter(R4_P3));
+                        double coef4_4 = Double.parseDouble(request.getParameter(R4_P4));
+                        try {
+                            EventService.getInstance().addEventWithoutCoefGeneration(name, date, time, rider1Id, rider2Id, rider3Id, rider4Id,
+                                    coef1_1, coef1_2, coef1_3, coef1_4, coef2_1, coef2_2, coef2_3, coef2_4,
+                                    coef3_1, coef3_2, coef3_3, coef3_4, coef4_1, coef4_2, coef4_3, coef4_4);
+                        } catch (AddEventException e) {
+                            ADDEVENTCOMMANDLOGGER.warn("Can not add event " + name, e);
+                        }
+                    }
+                }
             }
         }
         return page;

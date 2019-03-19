@@ -14,7 +14,7 @@
         var password = $.trim($("#passwordR").val());
         var confirmPassword = $.trim($("#passwordRS").val());
 
-        if (login.length > 2 && name.length > 1 && password.length > 2 && password === confirmPassword) {
+        if (login.length > 2 && name.length > 1 && password.length > 2 && password === confirmPassword && login.length <= 30 && name.length <= 30 && password.length <= 30) {
             bt.disabled = false;
         } else {
             bt.disabled = true;

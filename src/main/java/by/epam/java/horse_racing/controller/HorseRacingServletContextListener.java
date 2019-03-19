@@ -1,5 +1,6 @@
 package by.epam.java.horse_racing.controller;
 
+import by.epam.java.horse_racing.controller.exceptions.LoadingApplicationFatalException;
 import by.epam.java.horse_racing.dao.connection.ConnectionPool;
 import by.epam.java.horse_racing.dao.exceptions.CloseConnectionException;
 import by.epam.java.horse_racing.dao.exceptions.DBDriverInitException;
@@ -20,8 +21,7 @@ public class HorseRacingServletContextListener implements ServletContextListener
             ConnectionPool.getInstance().init("database.properties");
             BookmakerService.getInstance().start();
         } catch (DBDriverInitException | GetConnectionException | OpenDBPropFileException e) {
-            e.printStackTrace();
-
+            throw new LoadingApplicationFatalException(e);
         }
     }
 

@@ -4,6 +4,7 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.service.EventService;
 import by.epam.java.horse_racing.service.exceptions.UpdateEventException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -126,42 +127,43 @@ public class UpdateEventCommand extends ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page = ConfigurationManager.getInstance().getProperty("weburl.page.main");
-        String strId = request.getParameter(ID);
 
-        if (strId != null) {
-            int iventId = Integer.parseInt(strId);
+        if (request.getParameter(ID) != null) {
+            int iventId = Integer.parseInt(request.getParameter(ID));
             String name = request.getParameter(NAME);
+            name = XSSAttackSecurity.getInstance().secure(name);
+            if (name != null && name.length() <= 30) {
+                LocalDate date = LocalDate.parse(request.getParameter(DATE));
+                LocalTime time = LocalTime.parse(request.getParameter(TIME));
 
-            LocalDate date = LocalDate.parse(request.getParameter(DATE));
-            LocalTime time = LocalTime.parse(request.getParameter(TIME));
+                int rider1Id = Integer.parseInt(request.getParameter(RIDER_1));
+                int rider2Id = Integer.parseInt(request.getParameter(RIDER_2));
+                int rider3Id = Integer.parseInt(request.getParameter(RIDER_3));
+                int rider4Id = Integer.parseInt(request.getParameter(RIDER_4));
 
-            int rider1Id = Integer.parseInt(request.getParameter(RIDER_1));
-            int rider2Id = Integer.parseInt(request.getParameter(RIDER_2));
-            int rider3Id = Integer.parseInt(request.getParameter(RIDER_3));
-            int rider4Id = Integer.parseInt(request.getParameter(RIDER_4));
+                double coef1_1 = Double.parseDouble(request.getParameter(R1_P1));
+                double coef1_2 = Double.parseDouble(request.getParameter(R1_P2));
+                double coef1_3 = Double.parseDouble(request.getParameter(R1_P3));
+                double coef1_4 = Double.parseDouble(request.getParameter(R1_P4));
+                double coef2_1 = Double.parseDouble(request.getParameter(R2_P1));
+                double coef2_2 = Double.parseDouble(request.getParameter(R2_P2));
+                double coef2_3 = Double.parseDouble(request.getParameter(R2_P3));
+                double coef2_4 = Double.parseDouble(request.getParameter(R2_P4));
+                double coef3_1 = Double.parseDouble(request.getParameter(R3_P1));
+                double coef3_2 = Double.parseDouble(request.getParameter(R3_P2));
+                double coef3_3 = Double.parseDouble(request.getParameter(R3_P3));
+                double coef3_4 = Double.parseDouble(request.getParameter(R3_P4));
+                double coef4_1 = Double.parseDouble(request.getParameter(R4_P1));
+                double coef4_2 = Double.parseDouble(request.getParameter(R4_P2));
+                double coef4_3 = Double.parseDouble(request.getParameter(R4_P3));
+                double coef4_4 = Double.parseDouble(request.getParameter(R4_P4));
 
-            double coef1_1 = Double.parseDouble(request.getParameter(R1_P1));
-            double coef1_2 = Double.parseDouble(request.getParameter(R1_P2));
-            double coef1_3 = Double.parseDouble(request.getParameter(R1_P3));
-            double coef1_4 = Double.parseDouble(request.getParameter(R1_P4));
-            double coef2_1 = Double.parseDouble(request.getParameter(R2_P1));
-            double coef2_2 = Double.parseDouble(request.getParameter(R2_P2));
-            double coef2_3 = Double.parseDouble(request.getParameter(R2_P3));
-            double coef2_4 = Double.parseDouble(request.getParameter(R2_P4));
-            double coef3_1 = Double.parseDouble(request.getParameter(R3_P1));
-            double coef3_2 = Double.parseDouble(request.getParameter(R3_P2));
-            double coef3_3 = Double.parseDouble(request.getParameter(R3_P3));
-            double coef3_4 = Double.parseDouble(request.getParameter(R3_P4));
-            double coef4_1 = Double.parseDouble(request.getParameter(R4_P1));
-            double coef4_2 = Double.parseDouble(request.getParameter(R4_P2));
-            double coef4_3 = Double.parseDouble(request.getParameter(R4_P3));
-            double coef4_4 = Double.parseDouble(request.getParameter(R4_P4));
-
-            try {
-                EventService.getInstance().updateEvent(iventId, name, date, time, rider1Id, rider2Id, rider3Id, rider4Id, coef1_1, coef1_2
-                        , coef1_3, coef1_4, coef2_1, coef2_2, coef2_3, coef2_4, coef3_1, coef3_2, coef3_3, coef3_4, coef4_1, coef4_2, coef4_3, coef4_4);
-            } catch (UpdateEventException e) {
-                UPDATEEVENTCOMMANDLOGGER.warn("Can not update event " + name, e);
+                try {
+                    EventService.getInstance().updateEvent(iventId, name, date, time, rider1Id, rider2Id, rider3Id, rider4Id, coef1_1, coef1_2
+                            , coef1_3, coef1_4, coef2_1, coef2_2, coef2_3, coef2_4, coef3_1, coef3_2, coef3_3, coef3_4, coef4_1, coef4_2, coef4_3, coef4_4);
+                } catch (UpdateEventException e) {
+                    UPDATEEVENTCOMMANDLOGGER.warn("Can not update event " + name, e);
+                }
             }
         }
         return page;

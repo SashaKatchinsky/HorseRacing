@@ -6,6 +6,7 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.dao.UserDaoMySql;
 import by.epam.java.horse_racing.dao.exceptions.DaoException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.util.XSSAttackSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,21 +52,24 @@ public class RegisterUserCommand extends ActionCommand {
      */
     @Override
     public String execute(HttpServletRequest request)  {
-        String page;
+        String page = ConfigurationManager.getInstance().getProperty(PAGE_START);
         String login = request.getParameter(LOGIN);
         String name = request.getParameter(NAME);
-        char[] password = request.getParameter(PASSWORD).toCharArray();
-        page = ConfigurationManager.getInstance().getProperty(PAGE_START);
-        try {
-            boolean isExists = UserDaoMySql.getInstance().isExists(login);
-            if (isExists) {
-                page += GET_PARAM_REG_ERROR;
-            } else {
-                UserDaoMySql.getInstance().insertUser(new User(login, password, name, 10, LocalDate.now(), Access.USER));
-                page += GET_PARAM_SUCCESS_REG;
+        login = XSSAttackSecurity.getInstance().secure(login);
+        name = XSSAttackSecurity.getInstance().secure(name);
+        if (login != null && name != null && login.length() <= 30 && name.length() <= 30) {
+            char[] password = request.getParameter(PASSWORD).toCharArray();
+            try {
+                boolean isExists = UserDaoMySql.getInstance().isExists(login);
+                if (isExists) {
+                    page += GET_PARAM_REG_ERROR;
+                } else {
+                    UserDaoMySql.getInstance().insertUser(new User(login, password, name, 10, LocalDate.now(), Access.USER));
+                    page += GET_PARAM_SUCCESS_REG;
+                }
+            } catch (DaoException e) {
+                REGISTERUSERCOMMANDLOGGER.warn("Can not register user " + login, e);
             }
-        } catch (DaoException e) {
-            REGISTERUSERCOMMANDLOGGER.warn("Can not register user " + login , e);
         }
         return page;
     }

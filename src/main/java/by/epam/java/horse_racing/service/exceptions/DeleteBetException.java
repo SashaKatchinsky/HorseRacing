@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Delete bet exception.
  */
 public class DeleteBetException extends ServiceException {
+
+    private static final long serialVersionUID = 3334496284903619443L;
+
     /**
      * Instantiates a new Delete bet exception.
      */

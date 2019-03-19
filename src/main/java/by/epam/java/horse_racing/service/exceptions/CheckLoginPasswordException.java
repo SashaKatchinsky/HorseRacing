@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Check login password exception.
  */
 public class CheckLoginPasswordException extends ServiceException {
+
+    private static final long serialVersionUID = 6385140951481503553L;
+
     /**
      * Instantiates a new Check login password exception.
      */

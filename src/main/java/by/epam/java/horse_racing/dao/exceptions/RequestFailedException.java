@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.dao.exceptions;
  * The type Request failed exception.
  */
 public class RequestFailedException extends DaoException {
+
+    private static final long serialVersionUID = -3946799803501969045L;
+
     /**
      * Instantiates a new Request failed exception.
      */

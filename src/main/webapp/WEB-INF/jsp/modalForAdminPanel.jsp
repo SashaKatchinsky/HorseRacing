@@ -52,12 +52,13 @@
                     <h3 align="center"><fmt:message key="updateuser" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
                         <input type="hidden" name="command" value="updateUser">
-                        <fmt:message key="who" bundle="${ mainRB }" /> :    <select name="user">
+                        <fmt:message key="who" bundle="${ mainRB }" /> :
+                                <select name="user">
                                     <c:forEach items="${users}" var="user">
                                         <option value="${user.login}">${user.login}</option>
                                     </c:forEach>
                                 </select>
-                        <fmt:message key="name" bundle="${ mainRB }" /> :   <input type="text" value="Name" name="name" id="modalForAdminPanelUpdateUserName" onchange="checkUpdateUser()">
+                        <fmt:message key="name" bundle="${ mainRB }" /> :   <input type="text" value="<fmt:message key="name" bundle="${ mainRB }" />" name="name" id="modalForAdminPanelUpdateUserName" onchange="checkUpdateUser()">
 
                         <fmt:message key="balance" bundle="${ mainRB }" /> :<input type="number" value="10" name="balance" min="0">
                         </p>
@@ -71,7 +72,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Update" id="modalForAdminPanelUpdateUserSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />" id="modalForAdminPanelUpdateUserSubmit" class="great_btn" disabled>
                     </form>
                     <h3 align="center"><fmt:message key="deleteuser" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -86,7 +87,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Submit" align="center" class="great_btn">
+                        <input type="submit" value="<fmt:message key="delete" bundle="${ mainRB }" />" align="center" class="great_btn">
                     </form>
                 </section>
                 <section id="content-tab2">
@@ -129,7 +130,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Add" id="modalForAdminPanelAddRiderSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="add" bundle="${ mainRB }" />" id="modalForAdminPanelAddRiderSubmit" class="great_btn" disabled>
                     </form>
                     <h3 align="center"><fmt:message key="updaterider" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -150,7 +151,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Update" id="modalForAdminPanelUpdateRiderSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />" id="modalForAdminPanelUpdateRiderSubmit" class="great_btn" disabled>
                     </form>
                     <h3 align="center"><fmt:message key="deleterider" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -165,7 +166,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Delete" class="great_btn">
+                        <input type="submit" value="<fmt:message key="delete" bundle="${ mainRB }" />" class="great_btn">
                     </form>
                 </section>
                 <section id="content-tab3">
@@ -202,7 +203,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Add" id="modalForAdminPanelAddHorseSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="add" bundle="${ mainRB }" />" id="modalForAdminPanelAddHorseSubmit" class="great_btn" disabled>
                     </form>
                     <h3 align="center"><fmt:message key="updatehorse" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -224,9 +225,9 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Update" id="modalForAdminPanelUpdateHorseSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />" id="modalForAdminPanelUpdateHorseSubmit" class="great_btn" disabled>
                     </form>
-                    <h3 align="center"><fmt:message key="deleterider" bundle="${ mainRB }" /></h3>
+                    <h3 align="center"><fmt:message key="deletehorse" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
                         <input type="hidden" name="command" value="deleteHorse">
                         <fmt:message key="who" bundle="${ mainRB }" /> : <select name="id" >
@@ -239,7 +240,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Delete" class="great_btn">
+                        <input type="submit" value="<fmt:message key="delete" bundle="${ mainRB }" />" class="great_btn">
                     </form>
                 </section>
                 <section id="content-tab4">

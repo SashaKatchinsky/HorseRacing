@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.dao.exceptions;
  * The type Close connection exception.
  */
 public class CloseConnectionException extends DaoException{
+
+    private static final long serialVersionUID = -1958425932504846177L;
+
     /**
      * Instantiates a new Close connection exception.
      */

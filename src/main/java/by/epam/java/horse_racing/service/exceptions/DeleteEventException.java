@@ -4,6 +4,9 @@ package by.epam.java.horse_racing.service.exceptions;
  * The type Delete event exception.
  */
 public class DeleteEventException extends ServiceException {
+
+    private static final long serialVersionUID = -5872676107191414000L;
+
     /**
      * Instantiates a new Delete event exception.
      */

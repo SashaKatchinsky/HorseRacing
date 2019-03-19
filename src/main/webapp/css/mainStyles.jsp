@@ -67,16 +67,18 @@
     }
 
     .modalDialogForAdminPanel > div {
-        width: 810px;
+        width: 1000px;
         position: relative;
         margin: 10% auto;
-        padding: 5px 20px 13px 20px;
+        padding: 5px 10px 13px 10px;
         border-radius: 10px;
         background: #fff;
         background: -moz-linear-gradient(#fff, #999);
         background: -webkit-linear-gradient(#fff, #999);
         background: -o-linear-gradient(#fff, #999);
     }
+
+
     .modalDialogForBookmakerPanel {
         overflow: auto;
         position: fixed;
@@ -99,7 +101,7 @@
     }
 
     .modalDialogForBookmakerPanel > div {
-        width: 850px;
+        width: 950px;
         position: relative;
         margin: 5% auto;
         padding: 5px 20px 13px 20px;
@@ -162,7 +164,7 @@
     }
 
     .modalDialogForDoBet > div {
-        width: 450px;
+        width: 610px;
         position: relative;
         margin: 10% auto;
         padding: 5px 20px 13px 20px;
@@ -193,7 +195,7 @@
     }
 
     .modalDialogForCoefficients > div {
-        width: 900px;
+        width: 1000px;
         position: relative;
         margin: 10% auto;
         padding: 5px 20px 13px 20px;
@@ -227,7 +229,7 @@
     /* Базовый контейнер табов */
     .tabs {
         min-width: 320px;
-        max-width: 800px;
+        max-width: 100%;
         padding: 0px;
         margin: 0 auto;
     }

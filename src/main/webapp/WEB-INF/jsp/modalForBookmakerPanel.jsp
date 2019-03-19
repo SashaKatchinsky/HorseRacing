@@ -20,7 +20,7 @@
                 <label for="tab6"><fmt:message key="addevent" bundle="${ mainRB }"/></label>
 
                 <input id="tab7" type="radio" name="tabs">
-                <label for="tab7"><fmt:message key="updateuser" bundle="${ mainRB }"/></label>
+                <label for="tab7"><fmt:message key="updateevent" bundle="${ mainRB }"/></label>
 
                 <input id="tab8" type="radio" name="tabs">
                 <label for="tab8"><fmt:message key="deleteevent" bundle="${ mainRB }"/></label>
@@ -73,11 +73,11 @@
                     <h3 align="center"><fmt:message key="addevent" bundle="${ mainRB }"/></h3>
                     <form action="/main" method="post">
                         <input type="hidden" name="command" value="addIvent">
-                        <fmt:message key="name" bundle="${ mainRB }"/> :  <input type="text" name="name">
+                        <fmt:message key="name" bundle="${ mainRB }"/> :  <input type="text" name="name" required>
                         <p/>
-                        <fmt:message key="date" bundle="${ mainRB }"/> :  <input type="date" name="date">
+                        <fmt:message key="date" bundle="${ mainRB }"/> :  <input type="date" name="date" required>
                         <p/>
-                        <fmt:message key="time" bundle="${ mainRB }"/> :  <input type="time" name="time" step="1">
+                        <fmt:message key="time" bundle="${ mainRB }"/> :  <input type="time" name="time" step="1" required>
                         <p/>
                         <fmt:message key="rider" bundle="${ mainRB }"/> 1 :   <select name="rider1">
                                         <c:forEach items="${riders}" var="rider">
@@ -100,17 +100,18 @@
                                             <option value="${rider.id}">${rider.id} ${rider.name}</option>
                                         </c:forEach>
                                     </select>
+                        <pre><fmt:message key="thereisonlydifferentriderscantakepartintheeventotherwiseeventwillnotbeadded" bundle="${ mainRB }"/></pre>
                         <h3 align="center"><fmt:message key="choosecoefficientsonpositioninformatrider_position" bundle="${ mainRB }"/></h3>
                         <c:forEach begin="1" end="4" varStatus="i">
                             <c:forEach begin="1" end="4" varStatus="j">
-                                ${i.index} - ${j.index} <input type="number" min="0.01" max="10" step="0.01" name="${i.index}-${j.index}">
+                                ${i.index} - ${j.index} <input type="number" min="0.01" max="10" step="0.01" name="${i.index}-${j.index}" value="coef${i.index}-${j.index}">
                             </c:forEach>
                             <p/>
                         </c:forEach>
                         <h4><fmt:message key="orsetrandomcoefficients" bundle="${ mainRB }"/>
-                            <input type="checkbox" name="isRandomCoef">
+                            <input type="checkbox" name="isRandomCoef" id="isRandomCoef">
                         </h4>
-                        <input type="submit" value="Add" class="great_btn">
+                        <input type="submit" value="<fmt:message key="add" bundle="${ mainRB }"/>" class="great_btn">
                     </form>
                 </section>
                 <section id="content-tab7">
@@ -123,7 +124,7 @@
                                     </c:forEach>
                                 </select>
                         </p>
-                        <fmt:message key="name" bundle="${ mainRB }"/> :  <input type="text" name="name">
+                        <fmt:message key="name" bundle="${ mainRB }"/> :  <input type="text" name="name" required>
                         </p>
                         <fmt:message key="date" bundle="${ mainRB }"/> :  <input type="date" name="date">
                         <fmt:message key="time" bundle="${ mainRB }"/> :  <input type="time" name="time" step="1">
@@ -157,7 +158,7 @@
                             <p/>
                         </c:forEach>
                         <h4><fmt:message key="ifatleast1fieldwillbe0nothingwillchange" bundle="${ mainRB }"/></h4>
-                        <input type="submit" value="Update" class="great_btn">
+                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }"/>" class="great_btn">
                     </form>
                 </section>
 
@@ -171,7 +172,7 @@
                                     </c:forEach>
                                 </select>
                         </p>
-                        <input type="submit" name="Delete" class="great_btn"/>
+                        <input type="submit" name="<fmt:message key="delete" bundle="${ mainRB }"/>" class="great_btn"/>
                     </form>
                 </section>
 
@@ -182,3 +183,44 @@
         </div>
     </div>
 </c:if>
+<script>
+    $(function() {//code inside this function will run when the document is ready
+        $('#isRandomCoef').change(function() {//do something when the user clicks the box
+            if ($('#isRandomCoef').is(':checked')) {
+                $("#coef1-1").prop('disabled', true);
+                $("#coef1-2").prop('disabled', true);
+                $("coef1-3").prop('disabled', true);
+                $("coef1-4").prop('disabled', true);
+                $("coef2-1").prop('disabled', true);
+                $("coef2-2").prop('disabled', true);
+                $("coef2-3").prop('disabled', true);
+                $("coef2-4").prop('disabled', true);
+                $("coef3-1").prop('disabled', true);
+                $("coef3-2").prop('disabled', true);
+                $("coef3-3").prop('disabled', true);
+                $("coef3-4").prop('disabled', true);
+                $("coef4-1").prop('disabled', true);
+                $("coef4-2").prop('disabled', true);
+                $("coef4-3").prop('disabled', true);
+                $("coef4-4").prop('disabled', true);
+            } else {
+                $("#coef1-1").prop('disabled', false);
+                $("coef1-2").prop('disabled', false);
+                $("coef1-3").prop('disabled', false);
+                $("coef1-4").prop('disabled', false);
+                $("coef2-1").prop('disabled', false);
+                $("coef2-2").prop('disabled', false);
+                $("coef2-3").prop('disabled', false);
+                $("coef2-4").prop('disabled', false);
+                $("coef3-1").prop('disabled', false);
+                $("coef3-2").prop('disabled', false);
+                $("coef3-3").prop('disabled', false);
+                $("coef3-4").prop('disabled', false);
+                $("coef4-1").prop('disabled', false);
+                $("coef4-2").prop('disabled', false);
+                $("coef4-3").prop('disabled', false);
+                $("coef4-4").prop('disabled', false);
+            }
+        });
+    });
+</script>

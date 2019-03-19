@@ -1,6 +1,7 @@
 <%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://dateTimeTag.com" prefix="dt"%>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 <jsp:include page="/css/startStyles.jsp"/>
 <jsp:include page="/js/startScript.jsp"/>
@@ -24,24 +25,24 @@
     <div class="block1">
         <h2 align="center"><fmt:message key="login" bundle="${ startRB }" /></h2>
         <form name="loginForm" method="post" action="/start">
-            <input type="hidden" name="command" value="login" autocomplete="off">
+            <input type="hidden" name="command" value="login">
             <fmt:message key="username" bundle="${ startRB }" />:<br/>
-            <input type="text" name="loginL" id="loginL" value=""/>
+            <input type="text" name="loginL" id="loginL" value="" required/>
             <br/><fmt:message key="password" bundle="${ startRB }" />:<br/>
-            <input type="password" name="passwordL" id="passwordL" value=""/>
+            <input type="password" name="passwordL" id="passwordL" value="" required/>
             <br/><br/><br/><br/>
             <font class="errormessage">${errorLoginPassMessage}</font>
             <br/><br/><br/>
-            <input type="submit" value="<fmt:message key="login" bundle="${ startRB }" />" id="submitL" class="great_btn"/>
+            <input type="submit" value="<fmt:message key="login" bundle="${ startRB }" />" id="submitL" class="great_btn">
         </form>
     </div>
     <div class="block2">
         <h2><fmt:message key="registration" bundle="${ startRB }" /></h2>
         <form name="registartionForm" method="post" action="/start">
             <input type="hidden" name="command" value="registration">
-            <fmt:message key="username" bundle="${ startRB }" /><br/>
+            <fmt:message key="username" bundle="${ startRB }" />:<br/>
             <input type="text" id="loginR" name="loginR" onchange="checkRegistrationForm()" value="">
-            <br><fmt:message key="name" bundle="${ startRB }" /><br/>
+            <br><fmt:message key="name" bundle="${ startRB }" />:<br/>
             <input type="text" name="name" id="name" onchange="checkRegistrationForm()" value="">
             <br/><fmt:message key="password" bundle="${ startRB }" />:<br/>
             <input type="password" name="passwordR" id="passwordR" onchange="checkRegistrationForm()" autocomplete="off">
@@ -59,6 +60,43 @@
     </div>
 </div>
 <hr/>
+<dt:DateTimeTag locale="${language}"/>
 </body>
+<script>
+    function checkRegistrationForm() {
+        var bt = document.getElementById('submitR');
+        var login = $.trim($("#loginR").val());
+        var name = $.trim($("#name").val());
+        var password = $.trim($("#passwordR").val());
+        var confirmPassword = $.trim($("#passwordRS").val());
+
+        if (login.length > 2 && name.length > 1 && password.length > 2 && password === confirmPassword) {
+            bt.disabled = false;
+        } else {
+            bt.disabled = true;
+        }
+    }
+
+    function checkLoginForm() {
+        let bt = document.getElementById('submitL');
+        let login = $.trim($("#loginL").val());
+        let password = $.trim($("#passwordL").val());
+
+        if (login.length > 2 && password.length > 2) {
+            bt.disabled = false;
+        } else {
+            bt.disabled = true;
+        }
+    }
+
+    function checkForms() {
+        checkLoginForm();
+        checkRegistrationForm();
+    }
+
+    $(document).ready(function () {
+        $("#passwordR, #passwordRS , #name , #loginR , #passwordL, #loginL").onkeyup(checkForms);
+    });
+</script>
 
 </html>
