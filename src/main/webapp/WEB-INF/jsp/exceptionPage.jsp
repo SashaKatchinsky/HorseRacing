@@ -11,7 +11,7 @@
     <title>Exception</title>
 </head>
 <body background="/images/tree.jpg">
-<h1 align="center" f><span style="color: aliceblue">Sorry. Our server is fixing.</span></h1>
+<h1 align="center" f><span style="color: aliceblue">Sorry. Our server is being fixed.</span></h1>
 <h2 align="center"><span style="color: firebrick"><a href="/main">Go back.</a></span></h2>
 </body>
 </html>

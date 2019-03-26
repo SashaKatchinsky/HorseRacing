@@ -101,8 +101,8 @@ public class BetDaoMySql implements BetDao {
         List<Bet> bets = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
-        connection = ConnectionPool.getInstance().retrieve();
         try {
+            connection = ConnectionPool.getInstance().retrieve();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_BETS);
             while (resultSet.next()) {
@@ -123,7 +123,9 @@ public class BetDaoMySql implements BetDao {
             throw new CloseStatementException(e);
         } finally {
             closeStatement(statement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return bets;
     }
@@ -162,7 +164,9 @@ public class BetDaoMySql implements BetDao {
             throw new CloseStatementException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return bets;
     }
@@ -198,7 +202,9 @@ public class BetDaoMySql implements BetDao {
             throw new CloseStatementException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return bet;
     }
@@ -223,7 +229,9 @@ public class BetDaoMySql implements BetDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -255,7 +263,9 @@ public class BetDaoMySql implements BetDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -288,7 +298,9 @@ public class BetDaoMySql implements BetDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -312,7 +324,9 @@ public class BetDaoMySql implements BetDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -350,7 +364,9 @@ public class BetDaoMySql implements BetDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return bets;
     }
@@ -377,7 +393,9 @@ public class BetDaoMySql implements BetDao {
             e.printStackTrace();
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 

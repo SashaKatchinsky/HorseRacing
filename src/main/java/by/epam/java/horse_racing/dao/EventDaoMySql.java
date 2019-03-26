@@ -95,10 +95,10 @@ public class EventDaoMySql implements EventDao {
     @Override
     public synchronized List<Event> getAllEvents() throws DaoException {
         List<Event> events = new ArrayList<>();
-        Connection connection;
+        Connection connection = null;
         Statement statement = null;
-        connection = ConnectionPool.getInstance().retrieve();
         try {
+            connection = ConnectionPool.getInstance().retrieve();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_IVENTS);
             while (resultSet.next()) {
@@ -143,7 +143,9 @@ public class EventDaoMySql implements EventDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(statement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return events;
     }
@@ -200,7 +202,9 @@ public class EventDaoMySql implements EventDao {
             getConnectionException.printStackTrace();
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return event;
     }
@@ -225,7 +229,9 @@ public class EventDaoMySql implements EventDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -272,7 +278,9 @@ public class EventDaoMySql implements EventDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -320,7 +328,9 @@ public class EventDaoMySql implements EventDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -353,7 +363,9 @@ public class EventDaoMySql implements EventDao {
             e.printStackTrace();
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 

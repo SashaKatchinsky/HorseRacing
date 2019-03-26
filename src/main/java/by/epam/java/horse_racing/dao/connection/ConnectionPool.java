@@ -4,6 +4,8 @@ import by.epam.java.horse_racing.dao.exceptions.CloseConnectionException;
 import by.epam.java.horse_racing.dao.exceptions.DBDriverInitException;
 import by.epam.java.horse_racing.dao.exceptions.GetConnectionException;
 import by.epam.java.horse_racing.dao.exceptions.OpenDBPropFileException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -59,6 +61,11 @@ public class ConnectionPool {
      */
     private BlockingQueue<Connection> usedConnections;
 
+    /**
+     * Logger.
+     */
+    private static final Logger CONNECTIONPOOLLOGGER = LogManager.getLogger(ConnectionPool.class);
+
     private ConnectionPool() {
 
     }
@@ -73,7 +80,7 @@ public class ConnectionPool {
     }
 
     /**
-     * Init.
+     * Init database.
      *
      * @param dBPropName the database properties file name
      * @throws DBDriverInitException   the db driver init exception
@@ -99,6 +106,7 @@ public class ConnectionPool {
             Connection connection = getConnection();
             availableConnections.add(connection);
         }
+        CONNECTIONPOOLLOGGER.debug("Driver initialized successfully");
     }
 
     /**
@@ -118,25 +126,24 @@ public class ConnectionPool {
     }
 
     /**
-     * Retrieve connection.
+     * Retrieve connection from connection pool.
      *
      * @return the connection
      * @throws GetConnectionException the get connection exception
      */
     public Connection retrieve () throws GetConnectionException {
         Connection newConnection;
-        if (availableConnections.size() == 0) {
-            newConnection = getConnection();
-        } else {
-            newConnection = availableConnections.peek();
-            availableConnections.remove(newConnection);
+        try {
+            newConnection = availableConnections.take();
+        } catch (InterruptedException e) {
+            throw new GetConnectionException(e);
         }
         usedConnections.add(newConnection);
         return newConnection;
     }
 
     /**
-     * Put back.
+     * Put back connection in connection pool.
      *
      * @param connection the connection
      */
@@ -148,7 +155,7 @@ public class ConnectionPool {
     }
 
     /**
-     * Destroy.
+     * Destroy connection pool.
      *
      * @throws CloseConnectionException the close connection exception
      */

@@ -94,7 +94,9 @@ public class RiderDaoMySql implements RiderDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(statement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return riders;
     }
@@ -126,7 +128,9 @@ public class RiderDaoMySql implements RiderDao {
             getConnectionException.printStackTrace();
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return rider;
     }
@@ -151,7 +155,9 @@ public class RiderDaoMySql implements RiderDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -177,7 +183,9 @@ public class RiderDaoMySql implements RiderDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -205,7 +213,9 @@ public class RiderDaoMySql implements RiderDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -237,7 +247,9 @@ public class RiderDaoMySql implements RiderDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return riders;
     }
@@ -265,7 +277,9 @@ public class RiderDaoMySql implements RiderDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 

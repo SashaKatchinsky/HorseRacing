@@ -172,7 +172,8 @@
                                     </c:forEach>
                                 </select>
                         </p>
-                        <input type="submit" name="<fmt:message key="delete" bundle="${ mainRB }"/>" class="great_btn"/>
+                        <input type="submit" value="<fmt:message key="delete" bundle="${ mainRB }"/>"
+                               class="great_btn"/>
                     </form>
                 </section>
 
@@ -183,44 +184,3 @@
         </div>
     </div>
 </c:if>
-<script>
-    $(function() {//code inside this function will run when the document is ready
-        $('#isRandomCoef').change(function() {//do something when the user clicks the box
-            if ($('#isRandomCoef').is(':checked')) {
-                $("#coef1-1").prop('disabled', true);
-                $("#coef1-2").prop('disabled', true);
-                $("coef1-3").prop('disabled', true);
-                $("coef1-4").prop('disabled', true);
-                $("coef2-1").prop('disabled', true);
-                $("coef2-2").prop('disabled', true);
-                $("coef2-3").prop('disabled', true);
-                $("coef2-4").prop('disabled', true);
-                $("coef3-1").prop('disabled', true);
-                $("coef3-2").prop('disabled', true);
-                $("coef3-3").prop('disabled', true);
-                $("coef3-4").prop('disabled', true);
-                $("coef4-1").prop('disabled', true);
-                $("coef4-2").prop('disabled', true);
-                $("coef4-3").prop('disabled', true);
-                $("coef4-4").prop('disabled', true);
-            } else {
-                $("#coef1-1").prop('disabled', false);
-                $("coef1-2").prop('disabled', false);
-                $("coef1-3").prop('disabled', false);
-                $("coef1-4").prop('disabled', false);
-                $("coef2-1").prop('disabled', false);
-                $("coef2-2").prop('disabled', false);
-                $("coef2-3").prop('disabled', false);
-                $("coef2-4").prop('disabled', false);
-                $("coef3-1").prop('disabled', false);
-                $("coef3-2").prop('disabled', false);
-                $("coef3-3").prop('disabled', false);
-                $("coef3-4").prop('disabled', false);
-                $("coef4-1").prop('disabled', false);
-                $("coef4-2").prop('disabled', false);
-                $("coef4-3").prop('disabled', false);
-                $("coef4-4").prop('disabled', false);
-            }
-        });
-    });
-</script>

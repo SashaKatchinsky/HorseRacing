@@ -33,6 +33,16 @@ public class BetValidation {
         return LocalDateTime.of(eventOfBet.getDate(), eventOfBet.getTime()).compareTo(LocalDateTime.now()) > 0;
     }
 
+    /**
+     * Is riders valid boolean.
+     *
+     * @param rider1Position the rider 1 position
+     * @param rider2Position the rider 2 position
+     * @param rider3Position the rider 3 position
+     * @param rider4Position the rider 4 position
+     * @param countOfRiders  the count of riders
+     * @return the boolean
+     */
     public boolean isRidersValid(int rider1Position , int rider2Position , int rider3Position , int rider4Position , int countOfRiders) {
         Set<Integer> differentRiders = new TreeSet<>();
         if (rider1Position != 0) {

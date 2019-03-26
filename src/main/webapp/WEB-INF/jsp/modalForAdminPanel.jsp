@@ -72,7 +72,9 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />" id="modalForAdminPanelUpdateUserSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />"
+                               id="modalForAdminPanelUpdateUserSubmit" class="great_btn"
+                        >
                     </form>
                     <h3 align="center"><fmt:message key="deleteuser" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -119,7 +121,8 @@
                     <h3 align="center"><fmt:message key="addrider" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
                         <input type="hidden" name="command" value="addRider">
-                        <fmt:message key="name" bundle="${ mainRB }" /> : <input type="text" value="Name" name="name" id="modalForAdminPanelAddRiderName" onchange="checkAddRider()">
+                        <fmt:message key="name" bundle="${ mainRB }"/> : <input type="text" value="Name" name="name"
+                                                                                id="modalForAdminPanelAddRiderName">
                         <fmt:message key="horse" bundle="${ mainRB }" /> : <select name ="horseId">
                         <c:forEach items="${horses}" var="horse">
                             <option value="${horse.id}">${horse.id} ${horse.name} ${horse.breed}</option>
@@ -130,7 +133,8 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="<fmt:message key="add" bundle="${ mainRB }" />" id="modalForAdminPanelAddRiderSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="add" bundle="${ mainRB }" />"
+                               id="modalForAdminPanelAddRiderSubmit" class="great_btn">
                     </form>
                     <h3 align="center"><fmt:message key="updaterider" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -140,7 +144,9 @@
                             <option value="${rider.id}">${rider.id} ${rider.name}</option>
                         </c:forEach>
                     </select>
-                        <fmt:message key="name" bundle="${ mainRB }" />: <input type="text" name="updatedName" value="Name" id="modalForAdminPanelUpdateRiderName" onchange="checkUpdateRider()">
+                        <fmt:message key="name" bundle="${ mainRB }"/>: <input type="text" name="updatedName"
+                                                                               value="Name"
+                                                                               id="modalForAdminPanelUpdateRiderName">
                         <fmt:message key="horse" bundle="${ mainRB }" />: <select name="horseId">
                         <c:forEach items="${horses}" var="horse">
                             <option value="${horse.id}">${horse.id} ${horse.name} ${horse.breed}</option>
@@ -151,7 +157,8 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />" id="modalForAdminPanelUpdateRiderSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />"
+                               id="modalForAdminPanelUpdateRiderSubmit" class="great_btn">
                     </form>
                     <h3 align="center"><fmt:message key="deleterider" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -161,6 +168,10 @@
                                         <option value="${rider.id}">${rider.id} ${rider.name}</option>
                                     </c:forEach>
                                 </select>
+                        <p>
+                            <fmt:message key="ifthisriderplayedorwillplayineventshewillnotbedeleted"
+                                         bundle="${ mainRB }"/>
+                        </p>
                         <br/>
                         <br/>
                         <br/>
@@ -191,7 +202,8 @@
                     <h3 align="center"><fmt:message key="addhorse" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
                         <input type="hidden" name="command" value="addHorse">
-                        <fmt:message key="name" bundle="${ mainRB }" /> : <input type="text" name="name" value="Name" id="modalForAdminPanelAddHorseName" onchange="checkAddHorse()">
+                        <fmt:message key="name" bundle="${ mainRB }"/> : <input type="text" name="name" value="Name"
+                                                                                id="modalForAdminPanelAddHorseName">
                         <fmt:message key="breed" bundle="${ mainRB }" /> : <select name ="breed">
                         <option value="ARABIAN">Arabian</option>
                         <option value="AKHAL_TEKE">Akhal-Teke</option>
@@ -203,7 +215,8 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="<fmt:message key="add" bundle="${ mainRB }" />" id="modalForAdminPanelAddHorseSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="add" bundle="${ mainRB }" />"
+                               id="modalForAdminPanelAddHorseSubmit" class="great_btn">
                     </form>
                     <h3 align="center"><fmt:message key="updatehorse" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">
@@ -213,7 +226,8 @@
                             <option value="${horse.id}">${horse.id} ${horse.name} ${horse.breed}</option>
                         </c:forEach>
                     </select>
-                        <fmt:message key="name" bundle="${ mainRB }" /> : <input type="text" name="name" value="Name" id="modalForAdminPanelUpdateHorseName" onchange="checkUpdateHorse()">
+                        <fmt:message key="name" bundle="${ mainRB }"/> : <input type="text" name="name" value="Name"
+                                                                                id="modalForAdminPanelUpdateHorseName">
                         <fmt:message key="breed" bundle="${ mainRB }" /> : <select name ="breed">
                         <option value="ARABIAN">Arabian</option>
                         <option value="AKHAL_TEKE">Akhal-Teke</option>
@@ -225,7 +239,8 @@
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />" id="modalForAdminPanelUpdateHorseSubmit" class="great_btn" disabled>
+                        <input type="submit" value="<fmt:message key="update" bundle="${ mainRB }" />"
+                               id="modalForAdminPanelUpdateHorseSubmit" class="great_btn">
                     </form>
                     <h3 align="center"><fmt:message key="deletehorse" bundle="${ mainRB }" /></h3>
                     <form action="/main" method="post">

@@ -96,6 +96,9 @@ public class RiderService implements Service {
             if (ridersWithThisHorse != null) {
                 for (Rider rider : ridersWithThisHorse) {
                     int horseIndex = (int) (Math.random() * horses.size());
+                    while (horses.get(horseIndex).getId() == horseId) {
+                        horseIndex = (int) (Math.random() * horses.size());
+                    }
                     RiderDaoMySql.getInstance().setHorse(rider.getId(), horses.get(horseIndex).getId());
                 }
             }

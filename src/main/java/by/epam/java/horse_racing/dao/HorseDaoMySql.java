@@ -88,7 +88,9 @@ public class HorseDaoMySql implements HorseDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(statement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return horses;
     }
@@ -118,7 +120,9 @@ public class HorseDaoMySql implements HorseDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return horse;
     }
@@ -138,12 +142,14 @@ public class HorseDaoMySql implements HorseDao {
             preparedStatement = connection.prepareStatement(SQL_DELETE_HORSE_BY_KEY);
             preparedStatement.setInt(1 , horseId);
             preparedStatement.execute();
-            HORSEDAOMYSQLLOGGER.info("Horse " + HorseDaoMySql.getInstance().getHorseById(horseId) + " deleted");
+            HORSEDAOMYSQLLOGGER.info("Horse " + horseId + " deleted");
         } catch (SQLException e) {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -169,7 +175,9 @@ public class HorseDaoMySql implements HorseDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -197,7 +205,9 @@ public class HorseDaoMySql implements HorseDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 

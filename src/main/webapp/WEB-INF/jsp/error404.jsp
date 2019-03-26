@@ -11,7 +11,7 @@
     <title>404</title>
 </head>
 <body background="/images/tree.jpg">
-<h1 align="center" f><span style="color: aliceblue">Sorry. We can not finid this resource.</span></h1>
+<h1 align="center" f><span style="color: aliceblue">Sorry. We can not find this resource.</span></h1>
 <h2 align="center"><span style="color: firebrick"><a href="/main">Go back.</a></span></h2>
 </body>
 </html>

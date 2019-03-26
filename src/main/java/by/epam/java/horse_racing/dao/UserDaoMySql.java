@@ -96,7 +96,9 @@ public class UserDaoMySql implements UserDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(statement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return users;
     }
@@ -129,7 +131,9 @@ public class UserDaoMySql implements UserDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
         return user;
     }
@@ -154,7 +158,9 @@ public class UserDaoMySql implements UserDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -183,7 +189,9 @@ public class UserDaoMySql implements UserDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -214,7 +222,9 @@ public class UserDaoMySql implements UserDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -240,7 +250,9 @@ public class UserDaoMySql implements UserDao {
             return false;
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 
@@ -267,7 +279,9 @@ public class UserDaoMySql implements UserDao {
             throw new RequestFailedException(e);
         } finally {
             closeStatement(preparedStatement);
-            ConnectionPool.getInstance().putBack(connection);
+            if (connection != null) {
+                ConnectionPool.getInstance().putBack(connection);
+            }
         }
     }
 

@@ -31,7 +31,7 @@
             <br/><fmt:message key="password" bundle="${ startRB }" />:<br/>
             <input type="password" name="passwordL" id="passwordL" value="" required/>
             <br/><br/><br/><br/>
-            <font class="errormessage">${errorLoginPassMessage}</font>
+            <div class="errormessage">${errorLoginPassMessage}</div>
             <br/><br/><br/>
             <input type="submit" value="<fmt:message key="login" bundle="${ startRB }" />" id="submitL" class="great_btn">
         </form>

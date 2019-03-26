@@ -6,23 +6,23 @@
             <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
         </File>
 
-        <File name="FATALFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+        <File name="FATALFILE" fileName="${log4j:configParentLocation}/logs/Fatal.log">
             <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
         </File>
 
-        <FILE name="TRACEFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+        <FILE name="TRACEFILE" fileName="${log4j:configParentLocation}/logs/Trace.log">
             <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
         </FILE>
 
-        <File name="DEBUGFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+        <File name="DEBUGFILE" fileName="${log4j:configParentLocation}/logs/Debug.log">
             <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
         </File>
 
-        <File name="INFOFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+        <File name="INFOFILE" fileName="${log4j:configParentLocation}/logs/Info.log">
             <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
         </File>
 
-        <File name="WARNFILE" fileName="${log4j:configParentLocation}/logs/Error.log">
+        <File name="WARNFILE" fileName="${log4j:configParentLocation}/logs/Warn.log">
             <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n"/>
         </File>
 
@@ -37,9 +37,9 @@
             <Appender-ref ref="DEBUGFILE" level="DEBUG"/>
             <Appender-ref ref="ERRORFILE" level="ERROR"/>
             <Appender-ref ref="TRACEFILE" level="TRACE"/>
-            <Appender-ref ref="FATALEFILE" level="FATAL"/>
-            <Appender-ref ref="INFOEFILE" level="INFO"/>
-            <Appender-ref ref="WARNEFILE" level="WARN"/>
+            <Appender-ref ref="FATALFILE" level="FATAL"/>
+            <Appender-ref ref="INFOFILE" level="INFO"/>
+            <Appender-ref ref="WARNFILE" level="WARN"/>
         </Root>
     </Loggers>
 

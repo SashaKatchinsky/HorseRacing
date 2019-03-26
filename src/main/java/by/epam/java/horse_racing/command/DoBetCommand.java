@@ -2,7 +2,6 @@ package by.epam.java.horse_racing.command;
 
 import by.epam.java.horse_racing.bean.User;
 import by.epam.java.horse_racing.command.impl.ActionCommand;
-import by.epam.java.horse_racing.dao.exceptions.CloseStatementException;
 import by.epam.java.horse_racing.service.BetService;
 import by.epam.java.horse_racing.service.exceptions.DoBetException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
@@ -87,7 +86,7 @@ public class DoBetCommand extends ActionCommand {
                 betsInfo.add(rider4Position);
                 try {
                     BetService.getInstance().doBet(eventId, betsInfo, (User) request.getSession().getAttribute("user"), betAmount);
-                } catch (DoBetException | SQLException | CloseStatementException e) {
+                } catch (DoBetException | SQLException e) {
                     DOBETCOMMANDLOGGER.warn("Can not do bet on event " + eventId, e);
                 }
             }

@@ -4,6 +4,7 @@ import by.epam.java.horse_racing.command.impl.ActionCommand;
 import by.epam.java.horse_racing.dao.RiderDaoMySql;
 import by.epam.java.horse_racing.dao.exceptions.DaoException;
 import by.epam.java.horse_racing.util.ConfigurationManager;
+import by.epam.java.horse_racing.validation.RiderValidation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,7 +38,9 @@ public class DeleteRiderCommand extends ActionCommand {
         if (strId != null) {
             int deletedRiderId = Integer.parseInt(strId);
             try {
-                RiderDaoMySql.getInstance().deleteRider(deletedRiderId);
+                if (RiderValidation.getInstance().isValidForDelete(deletedRiderId)) {
+                    RiderDaoMySql.getInstance().deleteRider(deletedRiderId);
+                }
             } catch (DaoException e) {
                 DELETERIDERCOMMANDLOGGER.warn("Can not delete rider " + deletedRiderId, e);
             }

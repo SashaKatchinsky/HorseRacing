@@ -69,12 +69,12 @@ public class BetService implements Service {
      * @throws SQLException            the sql exception
      * @throws DoBetException          the do bet exception
      */
-    public void doBet(int iventId , List<Integer> betsInfo , User user, double betAmount) throws CloseStatementException, SQLException, DoBetException {
+    public void doBet(int iventId, List<Integer> betsInfo, User user, double betAmount) throws SQLException, DoBetException {
         BetStatus status = BetStatus.NOTPLAYED;
         int betId;
         List<Bet> betsForInsert = new ArrayList<>();
-        List<Bet> allBets = null;
-        Event event = null;
+        List<Bet> allBets;
+        Event event;
         try {
             allBets = BetDaoMySql.getInstance().getAllBets();
             event = EventDaoMySql.getInstance().getIventById(iventId);
@@ -140,7 +140,9 @@ public class BetService implements Service {
                     if (connection != null) {
                         connection.setAutoCommit(true);
                     }
-                    ConnectionPool.getInstance().putBack(connection);
+                    if (connection != null) {
+                        ConnectionPool.getInstance().putBack(connection);
+                    }
                 }
             }
         }
@@ -267,14 +269,13 @@ public class BetService implements Service {
         } catch (DaoException e) {
             throw new DeleteBetException(e);
         } finally {
-            try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-            } finally {
                 if (connection != null) {
                     connection.setAutoCommit(true);
                 }
+            if (connection != null) {
                 ConnectionPool.getInstance().putBack(connection);
             }
         }
